@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Do you wanna go out with me?</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <h1 class="header_text">Do You Want To See Magic?</h1>
+        </div>
+        <div class="gif_container">
+            <img src="https://i.postimg.cc/pdNqPxx1/milk-and-mocha-cute.gif" alt="Cute animated illustration" />
+        </div>
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="nextPage()">No</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()" ontouchstart="moveButton()">
+          Yes
+        </button>
+        </div>
+
+        <script>
+            function nextPage() {
+                window.location.href = "yes.html";
+            }
+
+            function moveButton() {
+                var btn = document.getElementById("noButton");
+                var btnWidth = btn.offsetWidth;
+                var btnHeight = btn.offsetHeight;
+                var padding = 10;
+
+                var maxX = window.innerWidth - btnWidth - padding;
+                var maxY = window.innerHeight - btnHeight - padding;
+
+                var x = padding + Math.random() * Math.max(maxX - padding, 0);
+                var y = padding + Math.random() * Math.max(maxY - padding, 0);
+
+                btn.style.position = "fixed";
+                btn.style.left = `${x}px`;
+                btn.style.top = `${y}px`;
+                btn.style.margin = "0";
+            }
+
+            // Re-clamp the button inside the viewport if the window is resized
+            // (e.g. rotating a phone) so it never gets stuck off-screen.
+            window.addEventListener("resize", function () {
+                var btn = document.getElementById("noButton");
+                if (btn.style.position === "fixed") {
+                    var maxX = window.innerWidth - btn.offsetWidth - 10;
+                    var maxY = window.innerHeight - btn.offsetHeight - 10;
+                    var currentX = parseFloat(btn.style.left) || 0;
+                    var currentY = parseFloat(btn.style.top) || 0;
+                    btn.style.left = `${Math.min(currentX, Math.max(maxX, 0))}px`;
+                    btn.style.top = `${Math.min(currentY, Math.max(maxY, 0))}px`;
+                }
+            });
+        </script>
+    </div>
+</body>
+
+</html>
